@@ -1,0 +1,27 @@
+{
+    "name": "app",
+    "version": "1.0.0",
+    "description": "photo",
+    "main": "app.js",
+    "dependencies": {
+        "@google-cloud/storage": "^5.1.0",
+        "@google-cloud/translate": "^6.0.0",
+        "@google-cloud/vision": "^2.0.0",
+        "axios": "^0.19.2",
+        "body-parser": "^1.19.0",
+        "core-js": "^3.6.5",
+        "express": "^4.17.1",
+        "express-session": "^1.17.1",
+        "expression": "0.0.1",
+        "fs": "0.0.1-security",
+        "jade": "^1.11.0",
+        "multer": "^1.4.2",
+        "pug": "^3.0.0",
+        "request": "^2.88.2"
+    },
+    "repository field": {
+        "type": "http",
+        "url": "http://khuhub.khu.ac.kr/2019102171/termprojecttest.git"
+    },
+    "license": ""
+}
