@@ -61,6 +61,27 @@ app.post('/upload', upload.single('userfile'), function(req, res){
     res.send('Uploaded' + req.file.originalname + ' 번역결과 ' + transresult );
 })
 
+app.use(bodyParser.json());
+app.post('/hook', function (req, res) {
+
+  var eventObj = req.body.events[0];
+  var source = eventObj.source;
+  var message = eventObj.message;
+
+  // request log
+  console.log('======================', new Date() ,'======================');
+  console.log('[request]', req.body);
+  console.log('[request source] ', eventObj.source);
+  console.log('[request message]', eventObj.message);
+
+  var detect = detectLangs(eventObj.message.text);
+
+  PAPAGOtrans_forLine(eventObj.replyToken, eventObj.message.text, detect);
+  
+
+  res.sendStatus(200);
+});
+
 
 //문자 인식 함수
 async function ImageRecognition(uploadedfilename) { 
@@ -107,38 +128,30 @@ function PAPAGOtranslation (query) {
 return transMessage;
 }
 
-/*
+//detectLangs
 function detectLangs(query){
-  var options = {
-    url: PAPAGO_LANG_URL,
-    form: {'query': query},
-    headers: {'X-Naver-Client-Id':PAPAGO_ID, 'X-Naver-Client-Secret': PAPAGO_SECRET}
-  };
   request.post(
     {
       url: PAPAGO_LANG_URL,
       form: {'query': query},
       headers: {'X-Naver-Client-Id':PAPAGO_ID, 'X-Naver-Client-Secret': PAPAGO_SECRET}
-    }, function (error, response, body) {
+    }, (error, response, body) => {
     if (!error && response.statusCode == 200) {
-      res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
-      res.end(body);
-    } else {
-      res.status(response.statusCode).end();
-      console.log('error = ' + response.statusCode);
+      var result = body.langCode;
     }
   });
+  return result;
 
  }
- */
+
 
 //line message trans 
-function PAPAGOtrans_forLine (replyToken, query) {
+function PAPAGOtrans_forLine (replyToken, query, detect) {
 
   request.post(
     {
       url: PAPAGO_URL,
-      form: {'source':'ko', 'target':'en', 'text':query},
+      form: {'source':`${detect}`, 'target':'en', 'text':query},
       headers: {'X-Naver-Client-Id':PAPAGO_ID, 'X-Naver-Client-Secret': PAPAGO_SECRET},
       body: `source=ko&target=en&text=` + query,
       json:true
