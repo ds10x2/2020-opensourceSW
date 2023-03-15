@@ -20,10 +20,10 @@ const domain = "www.tplinechatbot.tk"
 const sslport = 23023;
 var app = express();
 
-const TOKEN = 'h8xN39Zg0nRmPhRcwCfUt35UhGQvinzOSzl1VSHWPdaKaW4VDDs2bTvhvxnOH1FVzzJ4t1L0ih/uJ1idIKz8SvPin3PM4nLgt6roTaEVw105aIsZqDwlsKPS2ewb2WVbL2TK/BqVEBQ2MmHO2xFRzAdB04t89/1O/w1cDnyilFU='
+const TOKEN = ''
 const PAPAGO_URL = 'https://openapi.naver.com/v1/papago/n2mt'
-const PAPAGO_ID = 'W5BknW1dTHXMah9QZ_KK'
-const PAPAGO_SECRET = 'doQdf3ZMU3'
+const PAPAGO_ID = ''
+const PAPAGO_SECRET = ''
 const TARGET_URL = 'https://api.line.me/v2/bot/message/reply'
 const PAPAGO_LANG_URL = 'https://naveropenapi.apigw.ntruss.com/langs/v1/dect'
 var request = require('request');
